@@ -1,0 +1,32 @@
+<h3>Add your favourite cricketers</h3>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <form class="form" [formGroup]="cricketerForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" formControlName="name">
+                    <div *ngIf="name.errors?.required && (name.touched || submitted)" class="text-danger">
+                        name is required.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Country</label>
+                    <!-- <input type="country" class="form-control" formControlName="country"> -->
+                    <div><select formControlName="country" style="width:470px;height: 40px;">
+                            <option [value]="country" *ngFor="let country of countries"> {{country}}</option>
+                        </select></div>
+                    <div *ngIf="country.errors?.required && (country.touched || submitted)" class="text-danger">
+                        country is required.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Add</button>
+                </div>
+            </form>
+            <div *ngIf="errorMsg!=''">
+                {{errorMsg}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<!-- <div *ngIf="!isLogin" class="row">
+    <h3> To add your favourite cricketers please login....</h3>
+    <button class="btn btn-primary" id="login" [routerLink]="['/login']">Login</button>
+</div> -->
+
+<button *ngIf="user" class="btn btn-primary float-right" id="login" (click)="logout()">Logout</button>
+<div class="row m-0">
+    <div *ngIf="user; else login" class="col-md-5 displayCricketer">
+        <app-add-cricketer [cricketers]="cricketers" [user]="user"></app-add-cricketer>
+    </div>
+    <div *ngIf="cricketers.length>0" class="col-md-9 displayCricketer">
+        <app-display-cricketers [cricketers]="cricketers" [user]="user">
+        </app-display-cricketers>
+    </div>
+</div>
+
+
+<ng-template #login>
+    <div class="mb-3">
+        <b>To add your favourite cricketers please login....</b>
+        <button class="btn btn-primary" id="login" [routerLink]="['/login']">Login</button>
+    </div>
+</ng-template>
+
+
+
+
+<div *ngIf="cricketers.length===0">
+    <h3>Cricketers list is empty</h3>
+</div>

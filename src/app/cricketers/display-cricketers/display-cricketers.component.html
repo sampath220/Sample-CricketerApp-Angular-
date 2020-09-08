@@ -1,0 +1,30 @@
+<div>
+    <h3 class="text-center">Cricketers list</h3>
+    <label *ngIf="user" class="switch">
+        <input type="checkbox" [(ngModel)]="isChecked">
+        <b> Display your favourite cricketers</b>
+        <span class="slider"></span>
+    </label>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" (click)="onSort('name',sortType)">Name</th>
+                <th scope="col" (click)="onSort('country',sortType)">country</th>
+                <th scope="col" (click)="onSort('users',sortType)">No. of fans</th>
+                <th *ngIf="user && isChecked" scope="col"></th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let cricketer of cricketers;index as i">
+            <!-- <tr *ngIf="(isChecked && user && cricketer.users.includes(user.id)) || !isChecked"> -->
+            <tr *ngIf="(user && isChecked && cricketer.users.includes(user.id)) || !isChecked || !user">
+                <th scope="row">{{i+1}}</th>
+                <td>{{cricketer.name | titlecase}}</td>
+                <td>{{cricketer.country | titlecase}}</td>
+                <td>{{cricketer.users.length}}</td>
+                <td *ngIf="user && isChecked"><button class="btn btn-danger"
+                        (click)="deleteCricketer(cricketer)">delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
